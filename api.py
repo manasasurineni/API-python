@@ -38,27 +38,21 @@ def ind(ID):
 
 @app.route('/Students/upd/<ID>',methods=['PUT'])
 def upd(ID):
-    #'''
     for s in Data:
-        #print('in')
-        #print(s)
         if(str(s['ID'])==ID):
             student = s
-            #print('in if')
             #print(s)
-    #return jsonify({'details': s})
-    #return 'null'
 
-    #'''
     if('ID' in request.json):
         print('Student already exists')
         #return 'Student already exists'
     if('name' in request.json):
         student['name'] = request.json['name']
-        return jsonify({"updated_student":student})
+        #return jsonify({"updated_student":student})
     if('year' in request.json):
         student['year'] = request.json['year']
-        return jsonify({"updated_student": student})
+        #return jsonify({"updated_student": student})
+    return jsonify({"updated_student": student})
 
 @app.route('/Students/add',methods=['POST'])
 def add():
@@ -79,7 +73,8 @@ def remove(ID):
     if (student != 'Null'):
         Data.remove(student)
         #Data.pop(Student)
-    return 'Data removed for given ID'
+    return jsonify({'Deleted detail':student})
+    #return 'Data removed for given ID'
 
 if __name__ == "__main__":
     app.run(debug=True)
